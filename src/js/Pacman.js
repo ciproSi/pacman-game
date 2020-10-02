@@ -32,55 +32,91 @@ class Pacman {
     }
 
     moveRight() {
-        if (stage.width - 85 > this.posX) {
-            this.direction = 0;
-            if (this.mouth === 0) {
-                this.mouth = 85;
-            } else {this.mouth = 0}
-            this.posX += 85;
-            this.update ();
+        let typeOfEntity = this.collision((this.posX + 85) / 85, this.posY / 85);
+        if (typeOfEntity === 'wall') {
+            return;
+        } else {
+            if (stage.width - 85 > this.posX) {
+                this.direction = 0;
+                if (this.mouth === 0) {
+                    this.mouth = 85;
+                } else {this.mouth = 0}
+                this.posX += 85;
+                this.update ();
+            };
         };
     }
 
     moveLeft() {
-        if (this.posX > 0) {
-            this.direction = -85;
-            if (this.mouth === 0) {
-                this.mouth = 85;
-            } else {this.mouth = 0}
-            this.posX -= 85;
-            this.update ();
+        let typeOfEntity = this.collision((this.posX - 85) / 85, this.posY / 85);
+        if (typeOfEntity === 'wall') {
+            return;
+        } else {
+            if (this.posX > 0) {
+                this.direction = -85;
+                if (this.mouth === 0) {
+                    this.mouth = 85;
+                } else {this.mouth = 0}
+                this.posX -= 85;
+                this.update ();
+            };
         };
     }
 
     moveUp() {
-        if (this.posY > 0) {
-            this.direction = -255;
-            if (this.mouth === 0) {
-                this.mouth = 85;
-            } else {this.mouth = 0}
-            this.posY -= 85;
-            this.update ();
-        };
+        let typeOfEntity = this.collision(this.posX / 85, (this.posY - 85) / 85);
+        if (typeOfEntity === 'wall') {
+            return;
+        } else {
+            if (this.posY > 0) {
+                this.direction = -255;
+                if (this.mouth === 0) {
+                    this.mouth = 85;
+                } else {this.mouth = 0}
+                this.posY -= 85;
+                this.update ();
+            };
+        };    
     }
 
     moveDown() {
-        if (stage.height - 85 > this.posY) {
-            this.direction = -170;
-            if (this.mouth === 0) {
-                this.mouth = 85;
-            } else {this.mouth = 0}
-            this.posY += 85;
-            this.update ();
+        let typeOfEntity = this.collision(this.posX / 85, (this.posY + 85) / 85);
+        if (typeOfEntity === 'wall') {
+            return;
+        } else {
+            if (stage.height - 85 > this.posY) {
+                this.direction = -170;
+                if (this.mouth === 0) {
+                    this.mouth = 85;
+                } else {this.mouth = 0}
+                this.posY += 85;
+                this.update ();
+            };
         };
     }
 
+    collision(x, y) {
+        let typeOfEntity = null;
+        stage.entities.forEach((entity) => {
+            if (entity[0] === x && entity[1] === y) {
+                typeOfEntity = entity[2];
+            }
+        });
+        return typeOfEntity;
+
+    }
+
     update () {
-        this.element.style = `
+        // let typeOfEntity = this.collision(this.posX / 85, this.posY / 85);
+        // if (typeOfEntity === 'wall') {
+        //     return;
+        // } else {
+            this.element.style = `
             left: ${this.posX}px;
             top: ${this.posY}px;
             background-position-x: ${this.mouth}px;
             background-position-y: ${this.direction}px;
             `;
+        // }
     }
 }

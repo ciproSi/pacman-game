@@ -2,6 +2,7 @@ class Stage {
     constructor(width, height) {
         this.width = width;
         this.height = height;
+        this.entities = [];
     }
 
     render () {
@@ -26,9 +27,10 @@ class Stage {
     }
 
     addEntity () {
-        for (let i = 0; i < 5; i++) {
-        this.entity = new Entity (2,i, 'wall');
-        this.entity.mount(this.element);
+        for (let i = 1; i < 5; i++) {
+        let entity = new Entity (2,i, 'wall');
+        entity.mount(this.element);
+        this.entities.push([entity.posX, entity.posY, entity.type]);
     }
     }
 }
