@@ -59,6 +59,10 @@ body {
 .pacboy {
   &-active-light {
     background-image: url('/img/pacboy-active-light.png');
+    &--right-closed {
+      background-position-x: 85px;
+    }
+
   }
 
   &-active-medium {
