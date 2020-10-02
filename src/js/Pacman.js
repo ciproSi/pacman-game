@@ -32,6 +32,7 @@ class Pacman {
     }
 
     moveRight() {
+        if (this.gameOver) {return;}
         let entity = this.collision((this.posX + 85) / 85, this.posY / 85);
         if (entity.type === 'wall') {
             return;
@@ -48,6 +49,7 @@ class Pacman {
     }
 
     moveLeft() {
+        if (this.gameOver) {return;}
         let entity = this.collision((this.posX - 85) / 85, this.posY / 85);
         if (entity.type === 'wall') {
             return;
@@ -64,6 +66,7 @@ class Pacman {
     }
 
     moveUp() {
+        if (this.gameOver) {return;}
         let entity = this.collision(this.posX / 85, (this.posY - 85) / 85);
         if (entity.type === 'wall') {
             return;
@@ -80,6 +83,7 @@ class Pacman {
     }
 
     moveDown() {
+        if (this.gameOver) {return;}
         let entity = this.collision(this.posX / 85, (this.posY + 85) / 85);
         if (entity.type === 'wall') {
             return;
@@ -104,10 +108,18 @@ class Pacman {
                 indexOut = index;
             }
         });
-        if (entityObj.type === 'apple' || entityObj.type === 'bomb') {
+        if (entityObj.type === 'apple') {
             stage.entities.splice(indexOut,1);
             entityObj.element.remove();
 
+        } else if (entityObj.type === 'bomb') {
+            if (Math.random() < 0.5) {
+                this.gameOver = true;
+                entityObj.element.remove();
+                this.element.classList.add('entity--tomb');
+                this.element.classList.remove('entity--pac');
+                this.element.classList.remove('pacboy-active-light');
+            } else {entityObj.element.remove();}
         }
         return entityObj;
 

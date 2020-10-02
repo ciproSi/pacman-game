@@ -27,14 +27,13 @@ class Stage {
 
     }
 
-    addEntity (type) {
-        for (let i = 1; i < 5; i++) {
-        let entity = new Entity (i,i, type);
+    addEntity (x, y, type) {
+        let entity = new Entity (x,y , type);
         entity.mount(this.element);
         this.entities.push(entity);
     
     }
-    }
+    
 
     removeEntity (entity) {
         this.element.removeChild(entity);
