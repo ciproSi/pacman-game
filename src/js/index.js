@@ -6,6 +6,8 @@ console.log('it works!');
 
 
 
-const stageElm = document.querySelector('.stage');
-let pacman = new Pacman (0,0);
-pacman.mount(stageElm);
+const container = document.querySelector('.container');
+let stage = new Stage(850,510);
+stage.mount(container);
+
+stage.addPacman();

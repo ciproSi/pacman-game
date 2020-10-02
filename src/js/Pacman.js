@@ -32,7 +32,7 @@ class Pacman {
     }
 
     moveRight() {
-        if (screen.width - 150 > this.posX) {
+        if (stage.width - 85 > this.posX) {
             this.direction = 0;
             if (this.mouth === 0) {
                 this.mouth = 85;
@@ -65,7 +65,7 @@ class Pacman {
     }
 
     moveDown() {
-        if (screen.height - 150 > this.posY) {
+        if (stage.height - 85 > this.posY) {
             this.direction = -170;
             if (this.mouth === 0) {
                 this.mouth = 85;
