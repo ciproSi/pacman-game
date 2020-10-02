@@ -24,4 +24,11 @@ class Stage {
         pacman.mount(this.element);
 
     }
+
+    addEntity () {
+        for (let i = 0; i < 5; i++) {
+        this.entity = new Entity (2,i, 'wall');
+        this.entity.mount(this.element);
+    }
+    }
 }
