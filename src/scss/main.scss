@@ -62,6 +62,13 @@ body {
     &--right-closed {
       background-position-x: 85px;
     }
+    &--left-open {
+      background-position-y: -85px;
+    }
+    &--left-closed {
+      background-position-y: -85px;
+      background-position-x: 85px;
+    }
 
   }
 
