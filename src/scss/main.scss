@@ -11,8 +11,15 @@ body {
   margin: 0;
 }
 
+.score {
+  text-align: center;
+  margin: 2em 0 0 0;
+  font-size: 3em;
+}
+
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;

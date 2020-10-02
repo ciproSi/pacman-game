@@ -1,9 +1,9 @@
 'use strict';
 
-    const container = document.querySelector('.container');
-    let stage = new Stage(935,510);
-    stage.mount(container);
-    stage.addPacman();
+const container = document.querySelector('.container');
+let stage = new Stage(935,510);
+stage.mount(container);
+stage.addPacman();
 
 console.log('it works!');
 fetch('http://bootcamp.podlomar.org/api/pacman?width=11&height=6')
@@ -18,6 +18,7 @@ fetch('http://bootcamp.podlomar.org/api/pacman?width=11&height=6')
       maze.bombs.forEach((bomb) => {
         stage.addEntity(bomb.x, bomb.y, 'bomb');
       });
+        stage.amountOfApples = maze.apples.length;
     });
 
 

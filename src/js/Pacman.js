@@ -111,6 +111,8 @@ class Pacman {
         if (entityObj.type === 'apple') {
             stage.entities.splice(indexOut,1);
             entityObj.element.remove();
+            stage.score++;
+            stage.amountOfApples--;
 
         } else if (entityObj.type === 'bomb') {
             stage.entities.splice(indexOut,1);
@@ -127,6 +129,12 @@ class Pacman {
     }
 
     update () {
+        const scoreElm = document.querySelector('.score');
+        scoreElm.textContent = `Score: ${stage.score}`;
+        if (stage.amountOfApples === 0) {
+            scoreElm.textContent = `Score: ${stage.score} Winner`;
+            return;
+        }
         this.element.style = `
             left: ${this.posX}px;
             top: ${this.posY}px;

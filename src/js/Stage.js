@@ -4,6 +4,7 @@ class Stage {
         this.height = height;
         this.entities = [];
         this.score = 0;
+        this.amountOfApples = 0;
     }
 
     render () {
