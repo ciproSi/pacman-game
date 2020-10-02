@@ -3,6 +3,7 @@ class Stage {
         this.width = width;
         this.height = height;
         this.entities = [];
+        this.score = 0;
     }
 
     render () {
@@ -26,11 +27,16 @@ class Stage {
 
     }
 
-    addEntity () {
+    addEntity (type) {
         for (let i = 1; i < 5; i++) {
-        let entity = new Entity (2,i, 'wall');
+        let entity = new Entity (i,i, type);
         entity.mount(this.element);
-        this.entities.push([entity.posX, entity.posY, entity.type]);
+        this.entities.push(entity);
+    
     }
+    }
+
+    removeEntity (entity) {
+        this.element.removeChild(entity);
     }
 }

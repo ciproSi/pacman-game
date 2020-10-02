@@ -32,8 +32,8 @@ class Pacman {
     }
 
     moveRight() {
-        let typeOfEntity = this.collision((this.posX + 85) / 85, this.posY / 85);
-        if (typeOfEntity === 'wall') {
+        let entity = this.collision((this.posX + 85) / 85, this.posY / 85);
+        if (entity.type === 'wall') {
             return;
         } else {
             if (stage.width - 85 > this.posX) {
@@ -48,8 +48,8 @@ class Pacman {
     }
 
     moveLeft() {
-        let typeOfEntity = this.collision((this.posX - 85) / 85, this.posY / 85);
-        if (typeOfEntity === 'wall') {
+        let entity = this.collision((this.posX - 85) / 85, this.posY / 85);
+        if (entity.type === 'wall') {
             return;
         } else {
             if (this.posX > 0) {
@@ -64,8 +64,8 @@ class Pacman {
     }
 
     moveUp() {
-        let typeOfEntity = this.collision(this.posX / 85, (this.posY - 85) / 85);
-        if (typeOfEntity === 'wall') {
+        let entity = this.collision(this.posX / 85, (this.posY - 85) / 85);
+        if (entity.type === 'wall') {
             return;
         } else {
             if (this.posY > 0) {
@@ -80,8 +80,8 @@ class Pacman {
     }
 
     moveDown() {
-        let typeOfEntity = this.collision(this.posX / 85, (this.posY + 85) / 85);
-        if (typeOfEntity === 'wall') {
+        let entity = this.collision(this.posX / 85, (this.posY + 85) / 85);
+        if (entity.type === 'wall') {
             return;
         } else {
             if (stage.height - 85 > this.posY) {
@@ -96,27 +96,29 @@ class Pacman {
     }
 
     collision(x, y) {
-        let typeOfEntity = null;
-        stage.entities.forEach((entity) => {
-            if (entity[0] === x && entity[1] === y) {
-                typeOfEntity = entity[2];
+        let entityObj = {};
+        let indexOut;
+        stage.entities.forEach((entity, index) => {
+            if (entity.posX === x && entity.posY === y) {
+                entityObj = entity;
+                indexOut = index;
             }
         });
-        return typeOfEntity;
+        if (entityObj.type === 'apple' || entityObj.type === 'bomb') {
+            stage.entities.splice(indexOut,1);
+            entityObj.element.remove();
+
+        }
+        return entityObj;
 
     }
 
     update () {
-        // let typeOfEntity = this.collision(this.posX / 85, this.posY / 85);
-        // if (typeOfEntity === 'wall') {
-        //     return;
-        // } else {
-            this.element.style = `
+        this.element.style = `
             left: ${this.posX}px;
             top: ${this.posY}px;
             background-position-x: ${this.mouth}px;
             background-position-y: ${this.direction}px;
             `;
-        // }
     }
 }
