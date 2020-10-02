@@ -113,13 +113,14 @@ class Pacman {
             entityObj.element.remove();
 
         } else if (entityObj.type === 'bomb') {
+            stage.entities.splice(indexOut,1);
+            entityObj.element.remove();
             if (Math.random() < 0.5) {
                 this.gameOver = true;
-                entityObj.element.remove();
                 this.element.classList.add('entity--tomb');
                 this.element.classList.remove('entity--pac');
                 this.element.classList.remove('pacboy-active-light');
-            } else {entityObj.element.remove();}
+            } 
         }
         return entityObj;
 
