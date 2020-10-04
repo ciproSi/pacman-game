@@ -117,7 +117,7 @@ class Pacman {
         } else if (entityObj.type === 'bomb') {
             stage.entities.splice(indexOut,1);
             entityObj.element.remove();
-            if (Math.random() < 0.5) {
+            if (Math.random() < 0.5 && !stage.cheatMode) {
                 this.gameOver = true;
                 this.element.classList.add('entity--tomb');
                 this.element.classList.remove('entity--pac');
@@ -132,8 +132,13 @@ class Pacman {
         const scoreElm = document.querySelector('.score');
         scoreElm.textContent = `Score: ${stage.score}`;
         if (stage.amountOfApples === 0) {
-            scoreElm.textContent = `Score: ${stage.score} Winner`;
-            return;
+            scoreElm.textContent = `Winner`;
+            stage.element.remove();
+            scoreElm.classList.add('score--winner');
+            setTimeout(() => {
+                return;
+            }, 3000);
+            
         }
         this.element.style = `
             left: ${this.posX}px;

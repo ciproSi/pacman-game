@@ -1,12 +1,14 @@
 'use strict';
 
+let width = Number(prompt('Insert width of maze'));
+let height = Number(prompt('Insert height of maze'));
+
 const container = document.querySelector('.container');
-let stage = new Stage(935,510);
+let stage = new Stage(width * 85, height * 85);
 stage.mount(container);
 stage.addPacman();
 
-console.log('it works!');
-fetch('http://bootcamp.podlomar.org/api/pacman?width=11&height=6')
+fetch(`http://bootcamp.podlomar.org/api/pacman?width=${width - 1}&height=${height - 1}`)
     .then((resp) => resp.json())
     .then((maze) => {
       maze.walls.forEach((wall) => {
@@ -21,8 +23,6 @@ fetch('http://bootcamp.podlomar.org/api/pacman?width=11&height=6')
         stage.amountOfApples = maze.apples.length;
     });
 
-
-
-
+    
 
 

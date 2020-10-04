@@ -5,6 +5,8 @@ class Stage {
         this.entities = [];
         this.score = 0;
         this.amountOfApples = 0;
+        this.cheatCode = 'iddqd';
+        this.cheatMode = false;
     }
 
     render () {
@@ -14,10 +16,29 @@ class Stage {
             width: ${this.width}px;
             height: ${this.height}px;
         `;
+        
         return stageElm;
     }
 
     mount(parent) {
+        //listen to cheat codes
+        let keySequence = [];
+        document.addEventListener('keydown', (e) => {
+            keySequence.push(e.key);
+            if (keySequence.length > 5) {
+                keySequence.splice(0,1);
+            };
+            //array to regular string
+            let sequence = "";    
+            keySequence.forEach((key) => {
+                sequence += key; 
+            });
+
+            //compare to cheat
+            if (sequence === this.cheatCode) {
+            this.cheatMode = true;
+            };
+        });
         this.element = this.render()
         parent.appendChild(this.element);
     }
